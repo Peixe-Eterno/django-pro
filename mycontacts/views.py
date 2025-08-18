@@ -42,6 +42,11 @@ def add(request):
     else:
         return render(request, 'mycontacts/add.html')
     
+
+def view(request, pk):
+    contact = Contact.objects.get(id = pk)
+    return render(request, 'mycontacts/view.html', {'contact': contact})
+    
 def edit(request, pk):
     """ This function is called to add one contact member to your contact list in your Database """
     if request.method == 'POST':
@@ -85,6 +90,6 @@ def delete(request, pk):
     Contact.objects.filter(id = pk).delete()
             
     contact_list = Contact.objects.all()
-    
+
     return render(request, 'mycontacts/show.html',{'contacts': contact_list})
 
